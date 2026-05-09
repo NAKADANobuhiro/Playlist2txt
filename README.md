@@ -1,62 +1,62 @@
 # Playlist2txt
 
-Spotify のプレイリスト URL から、トラック情報（タイトル・アーティスト・アルバム）を
-テキストファイルに出力する Python スクリプトです。
+A Python script that exports track information (title, artist, album) from a Spotify playlist URL to a text file.
 
-## 出力形式
+[日本語版 README はこちら](README.ja.md)
 
-### コンパクト形式（デフォルト）
+## Output Formats
+
+### Compact format (default)
 
 ```
-RHYMESTER宇多丸の 今月の聴く『マブ論』！！ 2026年6月号  アトロク2
+RHYMESTER Udamaru's "Maburon" Listening Picks!! June 2026 — Atrok2
  1.GOODBYE (lyrical school)
- 2.SOUL LOVER (feat. 山添みなみ)(FAREWELL, MY L.u.v, 山添みなみ)
- 3.Bias Wrecker (feat. 山添みなみ)(FAREWELL, MY L.u.v, 山添みなみ)
+ 2.SOUL LOVER (feat. Minami Yamazoe)(FAREWELL, MY L.u.v, Minami Yamazoe)
+ 3.Bias Wrecker (feat. Minami Yamazoe)(FAREWELL, MY L.u.v, Minami Yamazoe)
 ...
 https://open.spotify.com/playlist/6qPcuHG2Z6pFTWZWCu8Mbf?si=xxx
 ```
 
-### 詳細形式（`--text`）
+### Verbose format (`--text`)
 
 ```
-プレイリスト: RHYMESTER宇多丸の 今月の聴く『マブ論』！！ 2026年6月号  アトロク2
-トラック数: 16
+Playlist: RHYMESTER Udamaru's "Maburon" Listening Picks!! June 2026 — Atrok2
+Tracks: 16
 ============================================================
 
 [  1] GOODBYE
-       アーティスト : lyrical school
-       アルバム     : GOODBYE
+       Artist : lyrical school
+       Album  : GOODBYE
 ...
 ```
 
-## セットアップ
+## Setup
 
-### 1. ライブラリのインストール
+### 1. Install dependencies
 
 ```
 pip install spotipy
 ```
 
-### 2. Spotify API アプリの作成
+### 2. Create a Spotify API app
 
-1. [Spotify Developer Dashboard](https://developer.spotify.com/dashboard) にアクセス
-2. 「Create app」でアプリを新規作成
-3. 「Redirect URIs」に以下を入力して保存:
+1. Go to [Spotify Developer Dashboard](https://developer.spotify.com/dashboard) and create an app
+2. Under **Redirect URIs**, add the following and save:
    ```
    http://127.0.0.1:8888/callback
    ```
-   > ⚠️ `http://localhost:8888/callback` は登録できないため、必ず `127.0.0.1` を使うこと
-4. 「Settings」画面で **Client ID** と **Client Secret** を確認
+   > ⚠️ `http://localhost:8888/callback` does NOT work — always use `127.0.0.1`
+3. Note your **Client ID** and **Client Secret** from the Settings page
 
-### 3. 環境変数の設定
+### 3. Set environment variables
 
-**Windows（コマンドプロンプト）:**
+**Windows (Command Prompt):**
 ```
 set SPOTIFY_CLIENT_ID=your_client_id
 set SPOTIFY_CLIENT_SECRET=your_client_secret
 ```
 
-**Windows（PowerShell）:**
+**Windows (PowerShell):**
 ```
 $env:SPOTIFY_CLIENT_ID="your_client_id"
 $env:SPOTIFY_CLIENT_SECRET="your_client_secret"
@@ -68,37 +68,37 @@ export SPOTIFY_CLIENT_ID=your_client_id
 export SPOTIFY_CLIENT_SECRET=your_client_secret
 ```
 
-## 使い方
+## Usage
 
 ```
 python Playlist2txt.py <playlist_url> [output_file] [--text]
 ```
 
-| 引数 | 説明 |
-|------|------|
-| `playlist_url` | Spotify プレイリストの URL（必須） |
-| `output_file` | 出力ファイル名（省略時はプレイリスト名.txt を自動生成） |
-| `--text` | 詳細形式で出力（省略時はコンパクト形式） |
+| Argument | Description |
+|----------|-------------|
+| `playlist_url` | Spotify playlist URL (required) |
+| `output_file` | Output filename (defaults to playlist name + `.txt`) |
+| `--text` | Use verbose format (defaults to compact format) |
 
-### 実行例
+### Examples
 
 ```
-# コンパクト形式、ファイル名自動
+# Compact format, auto filename
 python Playlist2txt.py https://open.spotify.com/playlist/6qPcuHG2Z6pFTWZWCu8Mbf?si=xxx
 
-# コンパクト形式、ファイル名指定
+# Compact format, custom filename
 python Playlist2txt.py https://open.spotify.com/playlist/6qPcuHG2Z6pFTWZWCu8Mbf?si=xxx output.txt
 
-# 詳細形式
+# Verbose format
 python Playlist2txt.py https://open.spotify.com/playlist/6qPcuHG2Z6pFTWZWCu8Mbf?si=xxx output.txt --text
 ```
 
-### 初回実行時
+### First run
 
-ブラウザが自動で開き、Spotify へのログインと権限承認が求められます。
-承認後はトークンが `.cache` ファイルに保存され、2 回目以降はブラウザ認証不要です。
+A browser window will open for Spotify login and permission approval.
+After authorization, the token is cached in `.cache` — subsequent runs will not require browser sign-in.
 
-## 動作環境
+## Requirements
 
-- Python 3.10 以上
+- Python 3.10+
 - spotipy 2.x
