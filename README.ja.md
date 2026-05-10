@@ -31,13 +31,22 @@ https://open.spotify.com/playlist/6qPcuHG2Z6pFTWZWCu8Mbf?si=xxx
 
 ## セットアップ
 
-### 1. ライブラリのインストール
+### 1. 認証情報ファイルを作成する
+
+```
+copy spotify_credentials.bat.example spotify_credentials.bat
+```
+
+`spotify_credentials.bat` を開いて、手順 3 で取得した認証情報を記入してください。
+このファイルは `.gitignore` で除外されており、Git にコミットされることはありません。
+
+### 2. ライブラリのインストール
 
 ```
 pip install spotipy
 ```
 
-### 2. Spotify API アプリの作成
+### 3. Spotify API アプリの作成
 
 1. [Spotify Developer Dashboard](https://developer.spotify.com/dashboard) にアクセス
 2. 「Create app」でアプリを新規作成
@@ -48,7 +57,7 @@ pip install spotipy
    > ⚠️ `http://localhost:8888/callback` は登録できないため、必ず `127.0.0.1` を使うこと
 4. 「Settings」画面で **Client ID** と **Client Secret** を確認
 
-### 3. 環境変数の設定
+### 4. 環境変数の設定
 
 **Windows（コマンドプロンプト）:**
 ```
@@ -97,6 +106,13 @@ python Playlist2txt.py https://open.spotify.com/playlist/6qPcuHG2Z6pFTWZWCu8Mbf?
 
 ブラウザが自動で開き、Spotify へのログインと権限承認が求められます。
 承認後はトークンが `.cache` ファイルに保存され、2 回目以降はブラウザ認証不要です。
+
+## GUI ランチャー（Windows 専用）
+
+`Playlist2txt_gui.bat` と `Playlist2txt_gui.py` は Windows 向けの GUI を提供します。
+`Playlist2txt_gui.bat` をダブルクリックするだけで起動できます。
+
+> ⚠️ `.bat` ランチャーおよび GUI は **Windows 専用**です。Mac/Linux ではコマンドラインスクリプトを直接使用してください。
 
 ## 動作環境
 

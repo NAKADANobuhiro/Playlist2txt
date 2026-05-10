@@ -32,13 +32,22 @@ Tracks: 16
 
 ## Setup
 
-### 1. Install dependencies
+### 1. Clone and create credentials file
+
+```
+cp spotify_credentials.bat.example spotify_credentials.bat
+```
+
+Edit `spotify_credentials.bat` and fill in your credentials (see step 3).
+This file is listed in `.gitignore` and will never be committed.
+
+### 2. Install dependencies
 
 ```
 pip install spotipy
 ```
 
-### 2. Create a Spotify API app
+### 3. Create a Spotify API app
 
 1. Go to [Spotify Developer Dashboard](https://developer.spotify.com/dashboard) and create an app
 2. Under **Redirect URIs**, add the following and save:
@@ -48,7 +57,7 @@ pip install spotipy
    > ⚠️ `http://localhost:8888/callback` does NOT work — always use `127.0.0.1`
 3. Note your **Client ID** and **Client Secret** from the Settings page
 
-### 3. Set environment variables
+### 4. Set environment variables
 
 **Windows (Command Prompt):**
 ```
@@ -97,6 +106,13 @@ python Playlist2txt.py https://open.spotify.com/playlist/6qPcuHG2Z6pFTWZWCu8Mbf?
 
 A browser window will open for Spotify login and permission approval.
 After authorization, the token is cached in `.cache` — subsequent runs will not require browser sign-in.
+
+## GUI Launcher (Windows only)
+
+`Playlist2txt_gui.bat` and `Playlist2txt_gui.py` provide a graphical interface for Windows users.
+Double-click `Playlist2txt_gui.bat` to launch.
+
+> ⚠️ The `.bat` launcher and GUI are **Windows only**. On Mac/Linux, use the command-line script directly.
 
 ## Requirements
 
